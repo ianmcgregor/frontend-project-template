@@ -1,0 +1,9 @@
+{
+    "name": "frontend-project-template",
+    "version": "0.0.0",
+    "dependencies": {
+        "normalize-css": "latest",
+        "suit-base": "latest",
+        "lodash": "latest"
+    }
+}
