@@ -10,8 +10,7 @@ module.exports = function(config) {
     plugins: [
       'karma-mocha',
       'karma-chai',
-      //'karma-browserifast',
-      'karma-browserify',
+      'karma-bro',
       'karma-chrome-launcher',
       'karma-firefox-launcher'
     ],
@@ -21,9 +20,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'test/*'
-      // todo: replace when fixed in karma-browserify
-      //'test/bundle-tests.js'
+      'test/**/*.js'
     ],
 
 
@@ -39,11 +36,11 @@ module.exports = function(config) {
       // transform: ['coffeeify'],
       // debug: true,
       // noParse: ['jquery'],
-      watch: true
+      // watch: true
     },
 
     // Add browserify to preprocessors
-    preprocessors: {'test/**/*': ['browserify']},
+    preprocessors: {'test/**/*.js': ['browserify']},
 
 
     // test results reporter to use
