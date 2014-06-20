@@ -43,13 +43,12 @@ function buildJS(debug) {
   var bundler = browserify(jsSrc+jsIndex);
   // alias libs to short names
   for(var key in alias) {
-    bundler.require(alias[key], { expose: key });
+    bundler.require(alias[key], { expose: key })
+      .on('error', logError);
   }
   var bundleStream = bundler.bundle({ debug: debug });
   bundleStream
-    .on('error', function(err){
-      logError(err);
-    })
+    .on('error', logError)
     .pipe(source(jsSrc+jsIndex))
     .pipe(gulpIf(!debug, streamify(strip())))
     .pipe(gulpIf(!debug, streamify(uglify())))
@@ -68,17 +67,14 @@ gulp.task('js-release', function() {
 // build css using minify and autoprefixer
 gulp.task('css', function() {
   gulp.src(cssSrc+cssIndex)
-    .on('error', function(err){
-      logError(err);
-    })
+    .on('error', logError)
     .pipe(minifyCSS({ keepBreaks: true }))
     .pipe(rework(
       require('rework-suit')
     ))
+    .on('error', logError)
     .pipe(autoprefix('last 2 version', '> 1%'))
-    .on('error', function(err){
-      logError(err);
-    })
+    .on('error', logError)
     //.pipe(rename({suffix: '.min'}))
     .pipe(rename(cssBundle))
     .pipe(gulp.dest(cssDist))
