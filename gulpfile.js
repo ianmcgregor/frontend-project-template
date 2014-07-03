@@ -1,18 +1,21 @@
 /* jshint strict: false */
 var gulp = require('gulp'),
     browserify = require('browserify'),
-    connect = require('gulp-connect'),
+    debowerify = require('debowerify'),
+    source = require('vinyl-source-stream'),
+    streamify = require('gulp-streamify'),
+    gulpIf = require('gulp-if'),
     rename = require('gulp-rename'),
     uglify = require('gulp-uglify'),
-    gulpIf = require('gulp-if'),
     strip = require('gulp-strip-debug'),
-    streamify = require('gulp-streamify'),
-    source = require('vinyl-source-stream'),
-    jshint = require('gulp-jshint'),
-    csslint = require('gulp-csslint'),
+
     minifyCSS = require('gulp-minify-css'),
     rework = require('gulp-rework'),
     autoprefix = require('gulp-autoprefixer'),
+
+    jshint = require('gulp-jshint'),
+    csslint = require('gulp-csslint'),
+    connect = require('gulp-connect'),
     chalk = require('chalk');
 
 // paths and file names
@@ -30,7 +33,7 @@ var src = './src',
 
 // alias libs to short names
 var alias = {
-  lodash: vendors+'lodash/dist/lodash.js'
+  //lodash: vendors+'lodash/dist/lodash.js'
 };
 
 //log
@@ -41,18 +44,20 @@ function logError(msg) {
 // build bundled js using browserify
 function buildJS(debug) {
   var bundler = browserify(jsSrc+jsIndex);
+  // include bower libs
+  bundler.transform(debowerify);
   // alias libs to short names
   for(var key in alias) {
     bundler.require(alias[key], { expose: key })
       .on('error', logError);
   }
+  // bundle
   var bundleStream = bundler.bundle({ debug: debug });
   bundleStream
     .on('error', logError)
     .pipe(source(jsSrc+jsIndex))
     .pipe(gulpIf(!debug, streamify(strip())))
     .pipe(gulpIf(!debug, streamify(uglify())))
-    //.pipe(rename({suffix: '.min'}))
     .pipe(rename(jsBundle))
     .pipe(gulp.dest(jsDist))
     .pipe(connect.reload());
