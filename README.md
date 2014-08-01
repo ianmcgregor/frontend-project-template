@@ -31,7 +31,6 @@ $ bower install
 * `/src` - Unminified source files
 * `/src/css` - CSS source files
 * `/src/js` - JavaScript source files
-* `/src/vendor` - Bower dependencies
 * `/test` - Unit Test specifications
 
 `.gitinclude` files are used to include some otherwise empty directories in the repository in order to define a reusable project structure. `.gitinclude` files can and should be removed if other files are put in the directory, or if the directory itself is not needed for the specific project.
@@ -83,4 +82,4 @@ A testing set up is included, utilising the [Karma](https://github.com/karma-run
 $ npm install -g karma-cli
 $ karma start
 ```
-A report highlighting any failed test will be output to the console.
+A report highlighting any failed test will be output to the console. Karma will keep running until the task is terminated and will rerun the tests when files are saved.

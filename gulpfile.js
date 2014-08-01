@@ -1,22 +1,20 @@
 /* jshint strict: false */
-var gulp = require('gulp'),
+var autoprefix = require('gulp-autoprefixer'),
     browserify = require('browserify'),
-    debowerify = require('debowerify'),
+    browserSync = require('browser-sync'),
+    chalk = require('chalk'),
+    csslint = require('gulp-csslint'),
+    gulp = require('gulp'),
+    gulpIf = require('gulp-if'),
+    jshint = require('gulp-jshint'),
+    minifyCSS = require('gulp-minify-css'),
+    rename = require('gulp-rename'),
+    rework = require('gulp-rework'),
     source = require('vinyl-source-stream'),
     streamify = require('gulp-streamify'),
-    gulpIf = require('gulp-if'),
-    rename = require('gulp-rename'),
-    uglify = require('gulp-uglify'),
     strip = require('gulp-strip-debug'),
-
-    minifyCSS = require('gulp-minify-css'),
-    rework = require('gulp-rework'),
-    autoprefix = require('gulp-autoprefixer'),
-
-    jshint = require('gulp-jshint'),
-    csslint = require('gulp-csslint'),
-    connect = require('gulp-connect'),
-    chalk = require('chalk');
+    suit = require('rework-suit'),
+    uglify = require('gulp-uglify');
 
 // paths and file names
 var src = './src',
@@ -28,39 +26,32 @@ var src = './src',
     cssSrc = src+'/css/',
     cssIndex = 'main.css',
     cssDist = dist+'/css/',
-    cssBundle = 'styles.css',
-    vendors = src+'/vendor/';
-
-// alias libs to short names
-var alias = {
-  //lodash: vendors+'lodash/dist/lodash.js'
-};
+    cssBundle = 'styles.css';
 
 //log
 function logError(msg) {
-  console.log(chalk.bold.red('[ERROR]'), msg);
+  console.log(chalk.bold.red('[ERROR] ' + msg.toString()));
 }
 
 // build bundled js using browserify
 function buildJS(debug) {
   var bundler = browserify(jsSrc+jsIndex);
-  // include bower libs
-  bundler.transform(debowerify);
-  // alias libs to short names
-  for(var key in alias) {
-    bundler.require(alias[key], { expose: key })
-      .on('error', logError);
-  }
-  // bundle
-  var bundleStream = bundler.bundle({ debug: debug });
-  bundleStream
+  /*var bundleStream = bundler.bundle({ debug: debug })
     .on('error', logError)
     .pipe(source(jsSrc+jsIndex))
     .pipe(gulpIf(!debug, streamify(strip())))
     .pipe(gulpIf(!debug, streamify(uglify())))
     .pipe(rename(jsBundle))
     .pipe(gulp.dest(jsDist))
-    .pipe(connect.reload());
+    .pipe(browserSync.reload({ stream: true }));*/
+
+  return bundler.bundle({debug: debug})
+    .on('error', logError)
+    .pipe(source(jsBundle))
+    .pipe(gulpIf(!debug, streamify(strip())))
+    .pipe(gulpIf(!debug, streamify(uglify())))
+    .pipe(gulp.dest(jsDist))
+    .pipe(browserSync.reload({ stream: true }));
 }
 gulp.task('js', function() {
   buildJS(true);
@@ -75,15 +66,14 @@ gulp.task('css', function() {
     .on('error', logError)
     .pipe(minifyCSS({ keepBreaks: true }))
     .pipe(rework(
-      require('rework-suit')
+      suit()
     ))
     .on('error', logError)
-    .pipe(autoprefix('last 2 version', '> 1%'))
+    .pipe(autoprefix('last 1 version'))
     .on('error', logError)
-    //.pipe(rename({suffix: '.min'}))
     .pipe(rename(cssBundle))
     .pipe(gulp.dest(cssDist))
-    .pipe(connect.reload());
+    .pipe(browserSync.reload({ stream: true }));
 });
 
 // js hint - ignore libraries and bundled
@@ -91,7 +81,7 @@ gulp.task('jshint', function() {
   return gulp.src([
       './gulpfile.js',
       jsSrc+'/**/*.js',
-      '!'+vendors+'**/*.js',
+      'test'+'/**/*.js',
       '!'+jsSrc+'/lib/**/*.js',
       '!'+jsDist+jsBundle
     ])
@@ -114,10 +104,16 @@ gulp.task('jshint', function() {
       'unused': true,
       'strict': true,
       'trailing': true,
+      'expr': true, // stops complaints about 'to.be.true' etc in tests
 
       'predef': [
           'Modernizr',
-          'ga'
+          'ga',
+          'describe',
+          'it',
+          'expect',
+          'beforeEach',
+          'afterEach'
       ]
   }))
   .pipe(jshint.reporter('jshint-stylish'));
@@ -153,9 +149,11 @@ gulp.task('csslint', function() {
 
 // connect with live reload
 gulp.task('connect', function() {
-  connect.server({
-    root: dist,
-    livereload: true
+  browserSync.init(null, {
+    browser: 'google chrome',
+    server: {
+      baseDir: dist,
+    }
   });
 });
 

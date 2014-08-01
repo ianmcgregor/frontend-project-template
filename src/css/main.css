@@ -1,7 +1,7 @@
 /*! Libraries */
 
-@import url('../vendor/normalize-css/normalize.css');
-@import url('../vendor/suit-base/base.css');
+@import url('../../node_modules/normalize.css/normalize.css');
+@import url('../../node_modules/suitcss-base/lib/base.css');
 
 /*! Elements */
 
