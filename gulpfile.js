@@ -35,17 +35,8 @@ function logError(msg) {
 
 // build bundled js using browserify
 function buildJS(debug) {
-  var bundler = browserify(jsSrc+jsIndex);
-  /*var bundleStream = bundler.bundle({ debug: debug })
-    .on('error', logError)
-    .pipe(source(jsSrc+jsIndex))
-    .pipe(gulpIf(!debug, streamify(strip())))
-    .pipe(gulpIf(!debug, streamify(uglify())))
-    .pipe(rename(jsBundle))
-    .pipe(gulp.dest(jsDist))
-    .pipe(browserSync.reload({ stream: true }));*/
-
-  return bundler.bundle({debug: debug})
+  var bundler = browserify(jsSrc+jsIndex, {debug: debug})
+    .bundle()
     .on('error', logError)
     .pipe(source(jsBundle))
     .pipe(gulpIf(!debug, streamify(strip())))
