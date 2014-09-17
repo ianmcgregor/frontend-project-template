@@ -17,6 +17,13 @@ A small framework-agnostic project template for front end web apps or sites usin
 From a terminal or command prompt at the project root run:
 
 ```shell
+$ npm install -g bower
+$ npm install -g browserify
+$ npm install -g browser-sync
+$ npm install -g gulp
+```
+
+```shell
 $ npm install
 $ bower install
 ```

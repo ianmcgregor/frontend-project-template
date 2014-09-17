@@ -22,7 +22,7 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "devDependencies": {
-    "browser-sync": "^1.4.0",
+    "browser-sync": "^1.3.7",
     "browserify": "^5.11.2",
     "browserify-shim": "^3.7.0",
     "chai": "^1.9.1",
