@@ -51,13 +51,13 @@
     "rework-suit": "^4.0.0",
     "signals": "^1.0.0",
     "suitcss-base": "^0.7.0",
+    "usfl": "^0.2.6",
     "vinyl-source-stream": "^1.0.0"
   },
   "browser": {
     "lib": "./bower_components/js-lib/dist/lib.js"
   },
-  "browserify-shim": {
-  },
+  "browserify-shim": {},
   "browserify": {
     "transform": [
       "browserify-shim"

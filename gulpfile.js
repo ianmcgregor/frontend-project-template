@@ -35,7 +35,7 @@ function logError(msg) {
 
 // build bundled js using browserify
 function buildJS(debug) {
-  var bundler = browserify(jsSrc+jsIndex, {debug: debug})
+  return browserify(jsSrc+jsIndex, {debug: debug})
     .bundle()
     .on('error', logError)
     .pipe(source(jsBundle))

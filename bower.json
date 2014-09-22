@@ -2,6 +2,6 @@
     "name": "frontend-project-template",
     "version": "0.0.2",
     "dependencies": {
-        "js-lib": "latest"
+        
     }
 }
