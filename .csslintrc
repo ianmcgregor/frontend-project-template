@@ -1,0 +1,18 @@
+{
+    "adjoining-classes": true,
+    "box-model": true,
+    "box-sizing": true,
+    "compatible-vendor-prefixes": true,
+    "bulletproof-font-face": true,
+    "empty-rules": true,
+    "font-faces": true,
+    "font-sizes": true,
+    "important": true,
+    "known-properties": true,
+    "outline-none": true,
+    "regex-selectors": true,
+    "star-property-hack": true,
+    "unique-headings": true,
+    "universal-selector": true,
+    "unqualified-attributes": true
+}
