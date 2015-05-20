@@ -1,51 +1,35 @@
-# OS
+.*
+~*
+!/.gitattributes
+!/.gitignore
+!/.gitinclude
+!/.editorconfig
+!/.jscsrc
+!/.jshintrc
+!/.jshintignore
+!/.csslintrc
+!/.travis.yml
 
-._*
-.DS_Store
-.DS_Store?
-.AppleDouble
-Icon?
-.Spotlight-V100
-.Trashes
 ehthumbs.db
 Thumbs.db
 Desktop.ini
-
-# VCS
-
-.svn
-*.orig
-!.gitinclude
-
-# IDE
-
-.settings/
-.project
 user.properties
-.idea
-.idea?
-.metadata/*
-*.ignore
-*.sublime-*
-*~
-*.swp
-*.swo
-dploy.yaml
 
-# BINARIES
+bower_components/
+node_modules/
+temp/
 
-*.mp4
-*.webm
-*.ogv
+*.air
+*.f4v
+*.flv
+*.m4v
 *.mov
 *.mp3
-*.wav
+*.mp4
 *.ogg
-*.air
+*.ogv
+*.psd
 *.pyc
-
-# FOLDERS
-
-node_modules/
-bower_components/
-.sass-cache/
+*.wav
+*.webm
+*.zip
