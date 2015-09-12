@@ -2,6 +2,11 @@
     // see http://jscs.info/rules.html
 
     "excludeFiles": [],
+    "esnext": null,
+
+    // React
+    // "esprima": "esprima-fb",
+
     "disallowAnonymousFunctions": null,
     "disallowCapitalizedComments": null,
     "disallowCommaBeforeLineBreak": null,

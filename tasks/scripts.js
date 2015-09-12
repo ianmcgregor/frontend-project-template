@@ -4,10 +4,9 @@ var args = require('yargs').argv;
 var browserify = require('browserify');
 var buffer = require('vinyl-buffer');
 var chalk = require('chalk');
+var eslint = require('gulp-eslint');
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
-var jscs = require('gulp-jscs');
-var jshint = require('gulp-jshint');
 var rename = require('gulp-rename');
 var source = require('vinyl-source-stream');
 var strip = require('gulp-strip-debug');
@@ -24,11 +23,8 @@ var bundler = browserify({
 
 function lint() {
     return gulp.src(paths.lint)
-        .pipe(jscs().on('error', function() {
-            return this;
-        }))
-        .pipe(jshint())
-        .pipe(jshint.reporter('jshint-stylish'));
+        .pipe(eslint())
+        .pipe(eslint.format());
 }
 
 function logError(msg) {

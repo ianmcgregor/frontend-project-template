@@ -4,6 +4,7 @@
 !/.gitignore
 !/.gitinclude
 !/.editorconfig
+!/.eslintrc
 !/.jscsrc
 !/.jshintrc
 !/.jshintignore

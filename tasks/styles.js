@@ -18,14 +18,14 @@ var processors = [
     require('postcss-custom-media')(),
     require('postcss-custom-properties')(),
     require('postcss-calc')(),
-    require('autoprefixer-core')({
+    require('autoprefixer')({
         browsers: ['last 2 version'],
         cascade: false
     })
 ];
 
 function logError(msg) {
-  console.log(chalk.bold.red('[ERROR] ' + msg.toString()));
+    console.log(chalk.bold.red('[ERROR] ' + msg.toString()));
 }
 
 function bundle() {

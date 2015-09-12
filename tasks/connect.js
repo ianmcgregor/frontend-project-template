@@ -5,12 +5,13 @@ var paths = require('./paths.json').connect;
 
 module.exports = function() {
     browserSync.init({
+        // middleware: [require('connect-history-api-fallback')()], // for spa routers
+        // open: false, // don't open browser
+        // port: '8000', // manually set port
         server: {
             baseDir: paths.dir
         },
         files: paths.files,
-        // open: false,
-        // port: '8000',
         reloadDebounce: 500
     });
 };

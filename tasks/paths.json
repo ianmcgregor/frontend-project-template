@@ -22,10 +22,7 @@
         "entry": "src/css/index.css",
         "dest": "dist/css/",
         "bundle": "styles.css",
-        "watch": "./src/css/**/*.css",
-        "lint": [
-            "src/css/**/*.css",
-            "!src/css/index.css"
-        ]
+        "watch": "src/css/**/*.css",
+        "lint": "dist/css/styles.css"
     }
 }
