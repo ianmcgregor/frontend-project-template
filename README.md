@@ -15,7 +15,7 @@ A small framework-agnostic project template for front end web apps or sites usin
 
 From a terminal or command prompt at the project root run:
 
-```shell
+<!-- ```shell -->
 $ npm install
 ```
 
@@ -82,10 +82,12 @@ $ gulp js
 
 ### Linting
 
-[JSHint](https://github.com/JSHint), [JSCS](http://jscs.info/) and [CSSLint](https://github.com/CSSLint) are setup to lint the working files in `src/` and to ignore bundles and libraries.
+[ESLint](http://eslint.org/) and [CSSLint](https://github.com/CSSLint) are setup to lint the working files in `src/` and to ignore bundles and libraries.
 
 ```shell
 $ gulp lint
+$ gulp js:lint
+$ gulp css:lint
 ```
 
 A detailed report highlighting any problems will be output to the console.
