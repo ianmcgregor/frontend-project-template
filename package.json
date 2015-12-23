@@ -103,10 +103,10 @@
       "bundle": "bundle.js",
       "lint": [
         "src/index.js",
-        "src/js/**/*.js",
-        "src/components/**/*.js",
+        "src/component/**/*.js",
+        "src/view/**/*.js",
         "task/**/*.js",
-        "!src/js/modernizr/modernizr.js"
+        "!src/modernizr/modernizr.js"
       ]
     },
     "styles": {
@@ -116,12 +116,14 @@
       "watch": [
         "src/index.css",
         "src/css/**/*.css",
-        "src/components/**/*.css"
+        "src/component/**/*.css",
+        "src/view/**/*.css"
       ],
       "lint": [
         "src/index.css",
         "src/css/**/*.css",
-        "src/components/**/*.css"
+        "src/component/**/*.css",
+        "src/view/**/*.css"
       ]
     },
     "images": {
@@ -137,14 +139,14 @@
         ],
         "dest": "dist"
       }, {
-        "entry": "src/js/modernizr/modernizr.js",
+        "entry": "src/modernizr/modernizr.js",
         "dest": "dist/js/modernizr"
       }],
       "watch": [
         "src/index.html",
         "src/robots.txt",
         "src/favicon.ico",
-        "src/js/modernizr/modernizr.js"
+        "src/modernizr/modernizr.js"
       ]
     }
   }

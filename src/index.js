@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import App from './js/view/App';
+import App from './view/App';
 
 console.log('Hello world');
 console.log('lodash', _.VERSION);
