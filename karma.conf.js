@@ -29,12 +29,7 @@ module.exports = function(config) {
 
         // Browserify config (all optional)
         browserify: {
-            // extensions: ['.coffee'],
-            // ignore: [],
-            // transform: ['coffeeify'],
-            // debug: true,
-            // noParse: ['jquery'],
-            // watch: true
+            debug: true
         },
 
         // Add browserify to preprocessors
@@ -52,9 +47,9 @@ module.exports = function(config) {
         // enable / disable colors in the output (reporters and logs)
         colors: true,
 
-        // level of logging
-        // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-        logLevel: config.LOG_DEBUG,
+        // level of logging. possible values:
+        // config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+        logLevel: config.LOG_ERROR,
 
         // enable / disable watching file and executing tests whenever any file changes
         autoWatch: true,

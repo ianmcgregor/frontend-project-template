@@ -1,7 +1,5 @@
-'use strict';
-
-var browserSync = require('browser-sync').create();
-var paths = require('./paths.json').connect;
+const browserSync = require('browser-sync').create();
+const paths = require('../package.json').paths.connect;
 
 module.exports = function() {
     browserSync.init({

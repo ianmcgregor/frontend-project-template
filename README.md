@@ -25,7 +25,7 @@ $ npm install
 
 * `/dist`  The webroot
 * `/src`   Unminified source files
-* `/tasks` Individual Gulp tasks
+* `/task`  Individual Gulp tasks
 * `/test`  Unit Test specifications
 
 `.gitinclude` files are used to include some otherwise empty directories in the repository in order to define a reusable project structure.
@@ -82,7 +82,7 @@ $ gulp js
 
 ### Linting
 
-[ESLint](http://eslint.org/) and [CSSLint](https://github.com/CSSLint) are setup to lint the working files in `src/` and to ignore bundles and libraries.
+[ESLint](http://eslint.org/) and [stylelint](http://stylelint.io/) are setup to lint the working files in `src/` and to ignore bundles and libraries.
 
 ```shell
 $ gulp lint
