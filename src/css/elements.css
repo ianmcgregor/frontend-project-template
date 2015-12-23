@@ -1,0 +1,9 @@
+button {
+    cursor: pointer;
+    font-family: var(--font);
+}
+
+button:focus,
+a:focus {
+    outline: none;
+}

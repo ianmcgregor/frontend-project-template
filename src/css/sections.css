@@ -1,0 +1,21 @@
+html {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    height: 100%;
+}
+
+body {
+    background-color: #fff;
+    color: #000;
+    font-family: var(--font);
+    font-size: 62.5%;
+    height: 100%;
+    line-height: 1.5;
+    margin: 0;
+    overflow-y: scroll;
+    padding: 0;
+}
+
+main {
+    display: block;
+}
