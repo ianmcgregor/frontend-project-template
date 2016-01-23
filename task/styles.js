@@ -1,5 +1,5 @@
-const chalk = require('chalk');
 const gulp = require('gulp');
+const logError = require('./helper/logError');
 const plumber = require('gulp-plumber');
 const postcss = require('gulp-postcss');
 const rename = require('gulp-rename');
@@ -24,10 +24,6 @@ const processors = [
     }),
     require('cssnano')()
 ];
-
-function logError(msg) {
-    console.log(chalk.bold.red('[ERROR] ' + msg.toString()));
-}
 
 function bundle() {
     return gulp.src(paths.entry)

@@ -4,7 +4,9 @@ import App from './view/App';
 console.log('Hello world');
 console.log('lodash', _.VERSION);
 
-document.body.innerHTML = 'changed';
+const msg = document.createElement('h3');
+msg.innerHTML = 'JS loaded';
+document.body.appendChild(msg);
 
 console.log('=>', [1, 2, 3].map((num) => num * num));
 

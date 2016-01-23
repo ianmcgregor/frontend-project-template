@@ -1,25 +1,30 @@
 const gulp = require('gulp');
 
 // connect
-gulp.task('connect', require('./task/connect.js'));
+gulp.task('connect', require('./task/connect'));
 
 // scripts
-gulp.task('js', require('./task/scripts.js').bundle);
-gulp.task('js:watch', require('./task/scripts.js').watch);
-gulp.task('js:lint', require('./task/scripts.js').lint);
-gulp.task('js:vendor', require('./task/scripts.js').vendor);
+gulp.task('js', require('./task/scripts').bundle);
+gulp.task('js:watch', require('./task/scripts').watch);
+gulp.task('js:lint', require('./task/scripts').lint);
+gulp.task('js:vendor', require('./task/scripts').vendor);
 
 // styles
-gulp.task('css', require('./task/styles.js').bundle);
-gulp.task('css:watch', require('./task/styles.js').watch);
-gulp.task('css:lint', require('./task/styles.js').lint);
+gulp.task('css', require('./task/styles').bundle);
+gulp.task('css:watch', require('./task/styles').watch);
+gulp.task('css:lint', require('./task/styles').lint);
+
+// html
+gulp.task('html', require('./task/html').render);
+gulp.task('html:watch', require('./task/html').watch);
 
 // static
-gulp.task('static', require('./task/static.js').copy);
-gulp.task('static:watch', require('./task/static.js').watch);
+gulp.task('static', require('./task/static').copy);
+gulp.task('static:watch', require('./task/static').watch);
 
 // build
 gulp.task('build', [
+    'html',
     'static',
     'css',
     'js',
@@ -30,7 +35,8 @@ gulp.task('build', [
 gulp.task('watch', [
     'css:watch',
     'js:watch',
-    'static:watch'
+    'static:watch',
+    'html:watch'
 ]);
 
 // lint

@@ -1,10 +1,10 @@
 const browserify = require('browserify');
 const buffer = require('vinyl-buffer');
-const chalk = require('chalk');
 const eslint = require('gulp-eslint');
 const gulp = require('gulp');
 const gulpif = require('gulp-if');
-const isProduction = require('./is-production');
+const logError = require('./helper/logError');
+const isProduction = require('./helper/is-production');
 const rename = require('gulp-rename');
 const source = require('vinyl-source-stream');
 const strip = require('gulp-strip-debug');
@@ -30,10 +30,6 @@ function lint() {
     return gulp.src(paths.lint)
         .pipe(eslint())
         .pipe(eslint.format());
-}
-
-function logError(msg) {
-    console.log(chalk.bold.red('[ERROR] ' + msg.toString()));
 }
 
 function createBundle(b, name, dest) {
