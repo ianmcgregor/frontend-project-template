@@ -1,5 +1,5 @@
 const gulp = require('gulp');
-const logError = require('./helper/logError');
+const logError = require('./helpers/logError');
 const plumber = require('gulp-plumber');
 const postcss = require('gulp-postcss');
 const rename = require('gulp-rename');
@@ -16,7 +16,7 @@ const processors = [
     require('postcss-easings')(),
     require('postcss-url')({
         url: 'inline',
-        maxSize: 4096
+        maxSize: 64
     }),
     require('autoprefixer')({
         browsers: ['last 2 version'],
@@ -29,7 +29,7 @@ function bundle() {
     return gulp.src(paths.entry)
         .pipe(plumber({errorHandler: logError}))
         .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(rename(paths.bundle))
+        .pipe(rename('styles.css'))
         .pipe(postcss(processors))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(paths.dest));

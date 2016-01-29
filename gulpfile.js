@@ -1,53 +1,57 @@
 const gulp = require('gulp');
 
-// connect
-gulp.task('connect', require('./task/connect'));
+gulp.task('connect', require('./tasks/connect'));
 
-// scripts
-gulp.task('js', require('./task/scripts').bundle);
-gulp.task('js:watch', require('./task/scripts').watch);
-gulp.task('js:lint', require('./task/scripts').lint);
-gulp.task('js:vendor', require('./task/scripts').vendor);
+gulp.task('css', require('./tasks/styles').bundle);
+gulp.task('css:watch', require('./tasks/styles').watch);
+gulp.task('css:lint', require('./tasks/styles').lint);
 
-// styles
-gulp.task('css', require('./task/styles').bundle);
-gulp.task('css:watch', require('./task/styles').watch);
-gulp.task('css:lint', require('./task/styles').lint);
+gulp.task('js', require('./tasks/scripts').bundle);
+gulp.task('js:watch', require('./tasks/scripts').watch);
+gulp.task('js:lint', require('./tasks/scripts').lint);
 
-// html
-gulp.task('html', require('./task/html').render);
-gulp.task('html:watch', require('./task/html').watch);
+gulp.task('modernizr', require('./tasks/scripts').modernizr);
+gulp.task('vendor', require('./tasks/scripts').vendor);
 
-// static
-gulp.task('static', require('./task/static').copy);
-gulp.task('static:watch', require('./task/static').watch);
+gulp.task('html', require('./tasks/html').render);
+gulp.task('html:watch', require('./tasks/html').watch);
 
-// build
+gulp.task('static', require('./tasks/static').copy);
+gulp.task('static:watch', require('./tasks/static').watch);
+
+gulp.task('images', require('./tasks/images').convert);
+gulp.task('images:watch', require('./tasks/images').watch);
+
+gulp.task('audio', require('./tasks/audio').convert);
+gulp.task('audio:watch', require('./tasks/audio').watch);
+
 gulp.task('build', [
     'html',
     'static',
     'css',
     'js',
-    'js:vendor'
+    'modernizr',
+    'vendor',
+    'images',
+    'audio'
 ]);
 
-// watch
 gulp.task('watch', [
     'css:watch',
     'js:watch',
     'static:watch',
-    'html:watch'
+    'html:watch',
+    'images:watch',
+    'audio:watch'
 ]);
 
-// lint
 gulp.task('lint', [
     'js:lint',
     'css:lint'
 ]);
 
-// default
 gulp.task('default', [
-    'build',
     'connect',
+    'build',
     'watch'
 ]);

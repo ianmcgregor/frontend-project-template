@@ -1,4 +1,5 @@
 const browserSync = require('browser-sync').create();
+
 const paths = require('../package.json').paths.connect;
 
 module.exports = function() {
@@ -10,6 +11,7 @@ module.exports = function() {
             baseDir: paths.dir
         },
         files: paths.files,
+        reloadDelay: 500,
         reloadDebounce: 500
     });
 };
