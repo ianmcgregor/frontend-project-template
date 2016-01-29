@@ -1,0 +1,32 @@
+/**
+ * Global element defaults
+ */
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+::selection {
+    background: var(--text-color);
+    color: var(--bg-color);
+    text-shadow: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+button:focus,
+a:focus {
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+    font-family: var(--font);
+    user-select: none;
+}
+
+table {
+    table-layout: fixed;
+}

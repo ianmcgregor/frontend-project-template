@@ -6,6 +6,7 @@
 !/.editorconfig
 !/.eslintrc
 !/.csslintrc
+!/.stylelintrc
 !/.travis.yml
 
 ehthumbs.db
@@ -14,8 +15,8 @@ Desktop.ini
 user.properties
 npm-debug.log
 
-dist/
 bower_components/
+dist/
 node_modules/
 temp/
 

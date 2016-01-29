@@ -1,5 +1,0 @@
-@custom-media --narrow (min-width: 415px);
-@custom-media --medium (min-width: 768px);
-@custom-media --large (min-width: 1280px);
-@custom-media --portrait (orientation: portrait);
-@custom-media --landscape (orientation: landscape);

@@ -1,3 +1,7 @@
+/**
+ * HTML section defaults
+ */
+
 html {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
@@ -5,17 +9,16 @@ html {
 }
 
 body {
-    background-color: #fff;
-    color: #000;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     font-family: var(--font);
     font-size: 62.5%;
     height: 100%;
+    letter-spacing: 0.025em;
     line-height: 1.5;
     margin: 0;
     overflow-y: scroll;
     padding: 0;
-}
-
-main {
-    display: block;
+    text-size-adjust: none;
+    touch-callout: none;
 }

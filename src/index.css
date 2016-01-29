@@ -5,16 +5,16 @@
 
 /* Vars */
 
-@import url("css/fonts.css");
-@import url("css/media.css");
-@import url("css/props.css");
+@import url("styles/fonts.css");
+@import url("styles/media.css");
+@import url("styles/props.css");
 
-/* Global */
+/* Global styles */
 
-@import url("css/sections.css");
-@import url("css/elements.css");
-@import url("css/utils.css");
+@import url("styles/sections.css");
+@import url("styles/elements.css");
+@import url("styles/utils.css");
 
 /* Components */
 
-@import url("component/Component.css");
+@import url("components/hello/Hello.css");
