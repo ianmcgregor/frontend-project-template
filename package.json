@@ -111,7 +111,7 @@
       "dest": "dist"
     },
     "images": {
-      "entry": "src/components/**/*.{png,jpg,svg}",
+      "entry": "src/components/**/*.{png,jpg,svg,json}",
       "dest": "dist/img"
     },
     "scripts": {
