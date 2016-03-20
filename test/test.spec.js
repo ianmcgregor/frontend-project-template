@@ -1,4 +1,4 @@
-const index = require('../src');
+const test = require('../src').test;
 
 describe('A test suite', function() {
     before(function() {});
@@ -8,6 +8,6 @@ describe('A test suite', function() {
 
     it('should pass', function() {
         expect(true).to.be.true;
-        expect(index.test()).to.eql('hello');
+        expect(test()).to.eql('hello');
     });
 });

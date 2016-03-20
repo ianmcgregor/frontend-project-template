@@ -1,10 +1,10 @@
 import _ from 'lodash';
-import app from './views/app/app';
+import hello from './components/hello/hello';
 
 console.log('lodash', _.VERSION);
 
-const testApp = app();
+document.body.insertAdjacentHTML('afterbegin', hello());
 
 export function test() {
-    return testApp;
+    return 'hello';
 }
