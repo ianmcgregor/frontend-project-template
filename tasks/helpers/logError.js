@@ -1,5 +1,11 @@
-const chalk = require('chalk');
+const notify = require('gulp-notify');
 
-module.exports = function logError(msg) {
-    console.log(chalk.bold.red('[ERROR] ' + msg.toString()));
+module.exports = function logError() {
+    notify.onError({
+        title: 'Error',
+        message: '<%= error.message %>'
+    })
+    .apply(this, [].slice.call(arguments));
+
+    this.emit('end');
 };

@@ -37,9 +37,7 @@ function bundle() {
 
 function lint() {
     return gulp.src(paths.lint)
-        .pipe(plumber({
-            errorHandler: logError
-        }))
+        .pipe(plumber({errorHandler: logError}))
         .pipe(postcss([
             require('stylelint')(),
             require('postcss-reporter')({

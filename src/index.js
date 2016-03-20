@@ -7,4 +7,4 @@ const testApp = app();
 
 export function test() {
     return testApp;
-};
+}
