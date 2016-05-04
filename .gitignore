@@ -20,9 +20,6 @@ dist/
 node_modules/
 temp/
 
-*.air
-*.f4v
-*.flv
 *.m4v
 *.mov
 *.mp3
@@ -31,6 +28,7 @@ temp/
 *.ogv
 *.psd
 *.pyc
+*.sql
 *.wav
 *.webm
 *.zip

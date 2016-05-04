@@ -2,22 +2,6 @@
 
 A small framework-agnostic project template for front-end web apps and sites.
 
-## Set up
-
-### Prerequisites
-
-* [Node](http://nodejs.org/)
-* [Gulp](http://gulpjs.com/)
-* [Browserify](http://browserify.org/)
-* [Karma](http://karma-runner.github.io/)
-
-### Getting started
-
-From a terminal or command prompt at the project root run:
-
-```shell
-$ npm install
-```
 
 ## Contents
 
@@ -66,33 +50,56 @@ $ npm install
 │   └── styles.js
 ├── test
 │   └── test.spec.js
-├── README.md
+├── .editorconfig
+├── .eslintrc
+├── .gitattributes
+├── .gitignore
+├── .stylelintrc
 ├── gulpfile.js
 ├── karma.conf.js
-└── package.json
+├── package.json
+└── README.md
 ```
 
 `.gitignore` files are used to include some otherwise empty directories in the repository in order to define a reusable project structure.
+
+
+## Set up
+
+### Prerequisites
+
+* [Node](http://nodejs.org/)
+* [Gulp](http://gulpjs.com/)
+* [Browserify](http://browserify.org/)
+* [Karma](http://karma-runner.github.io/)
+
+### Getting started
+
+From a terminal or command prompt at the project root run:
+
+```shell
+$ npm install
+```
+
+### HTML
+
+Only an index page is included in the default HTML structure, in `src/index.html`. By default, `lodash` template variables are used to configure a static index page which is written to `dist/index.html`.
 
 ### CSS
 
 The default CSS structure and build is based on [SUIT CSS](https://github.com/suitcss/) conventions. [Normalize](http://necolas.github.io/normalize.css/) and [SUIT base](https://github.com/suitcss/base/) are included as a basis for the project CSS.
 
-Stub base styles and placeholder files are included in `src/styles/`.
+Base styles and utilities are included in `src/styles/`. All other CSS files are in their respective component folders.
 
-[PostCSS](https://github.com/postcss/postcss)  transpiles the CSS to support future syntax and vendor prefixes.
+[PostCSS](https://github.com/postcss/postcss) transpiles the CSS to support future syntax and vendor prefixes.
 
 ### JS
 
+Polyfills and utilities are included in `src/utils/`. All other JS files are in their respective component folders.
+
+#### Babel
+
 [Babel](https://babeljs.io/) is included to transpile es6/7. The default presets are es2015 and stage-0.
-
-#### Modernizr
-
-A [simple modernizr version](http://modernizr.com/download?-addtest-setclasses-shiv-testprop-dontmin-cssclassprefix:Modernizr-) is included by default in the project in `src/utils/modernizr/`. It includes the standard HTML5 shim/shiv, CSSClasses, testProp and addTest. Modernizr CSS classNames are prefixed with `Modernizr-` to make them easy to recognise.
-
-#### Lodash
-
-[Lodash](https://lodash.com/) is included by default and is used for basic configuration of the `index.html` page.
 
 #### vendor.js
 
@@ -100,14 +107,22 @@ A separate `vendor.js` file can be built by configuring the vendor section in `p
 
 ```shell
 "vendor": {
-  "lodash": "lodash",
-  "threejs": "./src/vendor/threejs/three.js"
+    "lodash": "lodash",
+    "threejs": "./src/vendor/threejs/three.js"
 }
 ```
 
-#### Additional libraries
+#### Modernizr
 
-Any additional libaries can be installed through npm, or if a standalone or custom build is required, added in a new folder in `src/vendor/`.
+A [simple modernizr version](http://modernizr.com/download?-touchevents-addtest-setclasses-testprop-dontmin-cssclassprefix:Modernizr-) is included in the project in `src/utils/modernizr/`. It includes the standard HTML5 shim/shiv, CSSClasses, testProp and addTest. It also includes `touchevents` to exclude hover states from mobile devices. Modernizr CSS classNames are prefixed with `Modernizr-` to make them easy to recognise.
+
+#### Lodash
+
+[Lodash](https://lodash.com/) is included by default and is used for basic configuration of the `index.html` page.
+
+### Assets
+
+Static assets such as icons are included in their respective component folder in `src/components`. They are optimised and copied into folders in `dist/img` as part of the build process.
 
 ## Usage
 

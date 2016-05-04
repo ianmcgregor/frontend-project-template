@@ -1,3 +1,4 @@
+import './utils/polyfills';
 import _ from 'lodash';
 import hello from './components/hello/hello';
 

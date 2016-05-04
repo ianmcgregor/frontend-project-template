@@ -20,8 +20,10 @@
  * }
  */
 
+@custom-media --min-viewport (max-width: 639px);
 @custom-media --sm-viewport (min-width: 640px);
 @custom-media --md-viewport (min-width: 960px);
-@custom-media --lg-viewport (min-width: 1280px);
+@custom-media --lg-viewport (min-width: 1200px);
+@custom-media --xlg-viewport (min-width: 1440px);
 @custom-media --portrait (orientation: portrait);
 @custom-media --landscape (orientation: landscape);

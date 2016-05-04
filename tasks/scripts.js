@@ -59,10 +59,6 @@ function watch() {
     })
     .on('error', logError)
     .on('log', console.log.bind(console));
-
-    // gulp.watch(paths.modernizr.entry, {
-    //     interval: 500
-    // }, modernizr);
 }
 
 function vendor() {

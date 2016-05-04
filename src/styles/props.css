@@ -13,7 +13,7 @@
 
     /* font family */
 
-    --font: monospace;
+    --font-normal: monospace;
 
     /* font size */
 
@@ -22,8 +22,8 @@
 
     /* color palette */
 
-    --bg-color: #fff;
-    --text-color: #000;
+    --color-bg: #fff;
+    --color-text: #000;
 
     /* layout */
 

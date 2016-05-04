@@ -7,8 +7,8 @@
 }
 
 ::selection {
-    background: var(--text-color);
-    color: var(--bg-color);
+    background: var(--color-text);
+    color: var(--color-bg);
     text-shadow: none;
 }
 
@@ -24,7 +24,7 @@ a:focus {
 
 button {
     cursor: pointer;
-    font-family: var(--font);
+    font-family: var(--font-normal);
     user-select: none;
 }
 

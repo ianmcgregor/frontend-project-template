@@ -20,7 +20,7 @@ function render() {
         }))
         .pipe(debug({title: 'html'}))
         .pipe(gulp.dest(paths.dest));
-};
+}
 
 function watch() {
     gulp.watch(paths.entry, {

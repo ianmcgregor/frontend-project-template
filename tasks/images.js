@@ -16,16 +16,18 @@ function minify() {
     gulp.src(paths.entry)
         .pipe(changed(paths.dest))
         .pipe(imagemin())
-        .pipe(debug({title: 'images:min'}))
-        .pipe(gulp.dest(paths.dest));
+        .pipe(debug({title: 'images:min in'}))
+        .pipe(gulp.dest(paths.dest))
+        .pipe(debug({title: 'images:min out'}));
 }
 
 function webpify() {
-    gulp.src(paths.entry)
+    gulp.src(paths.entryWebp)
         .pipe(changed(paths.dest))
         .pipe(convertWebP(90))
-        .pipe(debug({title: 'images:webp'}))
-        .pipe(gulp.dest(paths.dest));
+        .pipe(debug({title: 'images:webp in'}))
+        .pipe(gulp.dest(paths.dest))
+        .pipe(debug({title: 'images:webp out'}));
 }
 
 function convert() {

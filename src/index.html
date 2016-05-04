@@ -1,28 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" class="Modernizr-no-js">
+<html class="Modernizr-no-js" lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 
-	<meta name="description" content="<%= data.description %>">
-	<meta name="keywords" content="<%= data.keywords.join(', ') %>">
-	<meta name="author" content="<%= data.author %>">
+    <meta name="description" content="<%= data.description %>">
+    <meta name="keywords" content="<%= data.keywords.join(', ') %>">
+    <meta name="author" content="<%= data.author %>">
 
-	<meta property="og:title" content="<%= data.name %>">
-	<meta property="og:site_name" content="<%= data.name %>">
-	<meta property="og:description" content="<%= data.description %>">
-	<meta property="og:type" content="website">
-	<meta property="og:url" content="">
-	<meta property="og:image" content="">
+    <meta property="og:title" content="<%= data.name %>">
+    <meta property="og:site_name" content="<%= data.name %>">
+    <meta property="og:description" content="<%= data.description %>">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
 
-	<title><%= data.name %></title>
-	<link href="favicon.ico" rel="shortcut icon">
-	<link href="css/styles.css" rel="stylesheet">
-	<script src="js/modernizr<%= min %>.js"></script>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@handle">
+    <meta name="twitter:creator" content="@handle">
+    <meta name="twitter:title" content="<%= data.name %>">
+    <meta name="twitter:description" content="<%= data.description %>">
+    <meta name="twitter:image" content="">
+
+    <title><%= data.name %></title>
+    <link href="favicon-32.png" rel="icon" sizes="32x32">
+    <link href="favicon-152.png" rel="apple-touch-icon-precomposed">
+    <link href="css/styles.css" rel="stylesheet">
+    <script src="js/modernizr<%= min %>.js"></script>
 </head>
 <body>
-	<% if (_.keys(data.vendor).length) { %><script src="js/vendor<%= min %>.js"></script><% } %>
-	<script src="js/bundle<%= min %>.js"></script>
+    <% if (_.keys(data.vendor).length) { %><script src="js/vendor<%= min %>.js"></script><% } %>
+    <script src="js/bundle<%= min %>.js"></script>
 </body>
 </html>
