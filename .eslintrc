@@ -46,6 +46,7 @@
         "no-caller": 2,
         "no-confusing-arrow": 2,
         "no-console": 0,
+        "no-const-assign": 2,
         "no-constant-condition": 2,
         "no-delete-var": 2,
         "no-empty": 2,
