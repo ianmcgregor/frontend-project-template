@@ -4,8 +4,8 @@ const eslint = require('gulp-eslint');
 const gulp = require('gulp');
 const gulpif = require('gulp-if');
 const logError = require('./helpers/logError');
-const isProduction = require('./helpers/is-production');
-const rename = require('gulp-rename');
+const debug = require('./helpers/debug');
+const logs = require('./helpers/logs');
 const source = require('vinyl-source-stream');
 const strip = require('gulp-strip-debug');
 const uglify = require('gulp-uglify');
@@ -16,7 +16,7 @@ const vendors = require('../package.json').vendor;
 
 const mainBundler = browserify({
     entries: paths.entry,
-    debug: !isProduction
+    debug: debug
 });
 
 // expose any vendor libs as external dependencies
@@ -38,11 +38,8 @@ function createBundle(bundler, name, dest) {
         .on('error', logError)
         .pipe(source(name))
         .pipe(buffer())
-        .pipe(gulpif(isProduction, uglify()))
-        .pipe(gulpif(isProduction, strip()))
-        .pipe(gulpif(isProduction, rename({
-            suffix: '.min'
-        })))
+        .pipe(gulpif(!debug, uglify()))
+        .pipe(gulpif(!debug && !logs, strip()))
         .pipe(gulp.dest(dest));
 }
 
@@ -67,7 +64,7 @@ function vendor() {
     }
 
     const vBundler = browserify({
-        debug: !isProduction
+        debug: debug
     });
 
     // include vendor libs in bundle
@@ -82,10 +79,7 @@ function vendor() {
 
 function modernizr() {
     return gulp.src(paths.modernizr.entry)
-        .pipe(gulpif(isProduction, uglify()))
-        .pipe(gulpif(isProduction, rename({
-            suffix: '.min'
-        })))
+        .pipe(gulpif(!debug, uglify()))
         .pipe(gulp.dest(paths.modernizr.dest));
 }
 

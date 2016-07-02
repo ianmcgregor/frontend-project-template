@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const gulpwatch = require('gulp-watch');
 const changed = require('gulp-changed');
 const debug = require('gulp-debug');
 
@@ -13,9 +14,7 @@ function copy() {
 }
 
 function watch() {
-    gulp.watch(paths.entry, {
-        interval: 500
-    }, copy);
+    gulpwatch(paths.entry, copy);
 }
 
 module.exports = {

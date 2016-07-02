@@ -12,9 +12,9 @@ body {
     background-color: var(--color-bg);
     color: var(--color-text);
     font-family: var(--font-normal), sans-serif;
-    font-size: 62.5%;
+    /*font-size: 62.5%;*/
     height: 100%;
-    letter-spacing: 0.025em;
+    /*letter-spacing: 0.025em;*/
     line-height: 1.5;
     margin: 0;
     overflow-y: scroll;

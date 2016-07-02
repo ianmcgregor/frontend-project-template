@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const gulpwatch = require('gulp-watch');
 const logError = require('./helpers/logError');
 const plumber = require('gulp-plumber');
 const postcss = require('gulp-postcss');
@@ -47,9 +48,7 @@ function lint() {
 }
 
 function watch() {
-    gulp.watch(paths.watch, {
-        interval: 500
-    }, bundle);
+    gulpwatch(paths.watch, bundle);
 }
 
 module.exports = {

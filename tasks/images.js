@@ -1,16 +1,11 @@
 const gulp = require('gulp');
+const gulpwatch = require('gulp-watch');
 const changed = require('gulp-changed');
 const debug = require('gulp-debug');
 const imagemin = require('gulp-imagemin');
-const webp = require('imagemin-webp');
+const webp = require('gulp-webp');
 
 const paths = require('../package.json').paths.images;
-
-function convertWebP(quality) {
-    return webp({
-        quality: quality
-    })();
-}
 
 function minify() {
     gulp.src(paths.entry)
@@ -24,7 +19,7 @@ function minify() {
 function webpify() {
     gulp.src(paths.entryWebp)
         .pipe(changed(paths.dest))
-        .pipe(convertWebP(90))
+        .pipe(webp({quality: 90}))
         .pipe(debug({title: 'images:webp in'}))
         .pipe(gulp.dest(paths.dest))
         .pipe(debug({title: 'images:webp out'}));
@@ -36,9 +31,7 @@ function convert() {
 }
 
 function watch() {
-    gulp.watch(paths.entry, {
-        interval: 500
-    }, convert);
+    gulpwatch(paths.entry, convert);
 }
 
 module.exports = {

@@ -1,8 +1,8 @@
 const gulp = require('gulp');
+const gulpwatch = require('gulp-watch');
 const debug = require('gulp-debug');
 const template = require('gulp-template');
 const logError = require('./helpers/logError');
-const isProduction = require('./helpers/is-production');
 
 const paths = require('../package.json').paths.html;
 
@@ -11,8 +11,6 @@ const templateData = {
 };
 
 function render() {
-    templateData.min = isProduction ? '.min' : '';
-
     return gulp.src(paths.entry)
         .pipe(template(templateData)
         .on('error', function(err) {
@@ -23,9 +21,7 @@ function render() {
 }
 
 function watch() {
-    gulp.watch(paths.entry, {
-        interval: 500
-    }, render);
+    gulpwatch(paths.entry, render);
 }
 
 module.exports = {

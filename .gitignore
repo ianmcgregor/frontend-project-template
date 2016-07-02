@@ -15,10 +15,10 @@ Desktop.ini
 user.properties
 npm-debug.log
 
-bower_components/
-dist/
-node_modules/
-temp/
+/bower_components/
+/dist/
+/node_modules/
+/temp/
 
 *.m4v
 *.mov

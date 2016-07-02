@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const gulpwatch = require('gulp-watch');
 const ffmpeg = require('gulp-fluent-ffmpeg');
 const changed = require('gulp-changed');
 const debug = require('gulp-debug');
@@ -52,9 +53,7 @@ function watch() {
         return;
     }
 
-    gulp.watch(paths.entry, {
-        interval: 500
-    }, convert);
+    gulpwatch(paths.entry, convert);
 }
 
 module.exports = {

@@ -23,6 +23,7 @@ a:focus {
 }
 
 button {
+    color: inherit;
     cursor: pointer;
     font-family: var(--font-normal);
     user-select: none;
