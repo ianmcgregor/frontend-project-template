@@ -23,7 +23,7 @@ function mp3() {
                 .audioChannels(2)
                 .audioCodec('libmp3lame');
         }))
-        .pipe(debug({title: 'audio:ogg'}))
+        .pipe(debug({title: 'audio:mp3'}))
         .pipe(gulp.dest(paths.dest));
 }
 
@@ -35,7 +35,7 @@ function ogg() {
                 .audioChannels(2)
                 .audioCodec('libvorbis');
         }))
-        .pipe(debug({title: 'audio:mp3'}))
+        .pipe(debug({title: 'audio:ogg'}))
         .pipe(gulp.dest(paths.dest));
 }
 

@@ -14,5 +14,13 @@ import 'core-js/fn/string/includes';
 */
 
 import 'usfl/polyfill/classList';
-// import 'usfl/polyfill/console';
+import 'usfl/polyfill/console';
 import 'usfl/polyfill/requestAnimationFrame';
+
+
+/*
+* object-fit
+*/
+
+import objectFitImages from 'object-fit-images';
+objectFitImages();

@@ -14,6 +14,7 @@ const processors = [
     require('postcss-custom-media')(),
     require('postcss-custom-properties')(),
     require('postcss-calc')(),
+    require('postcss-object-fit-images')(),
     require('postcss-easings')(),
     require('postcss-url')({
         url: 'inline',
