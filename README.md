@@ -9,15 +9,22 @@ A small framework-agnostic project template for front-end web apps and sites.
 
 * `/dist`  The build folder
 * `/docs`  Documentation
-* `/src`   Unminified source files
-* `/tasks` Individual build tasks
-* `/test`  Unit Test specifications
+* `/scripts` Build scripts
+* `/src`   Source files
+* `/test`  Unit tests
 
 ### Directory Structure
 
 ```
 ├── dist
 ├── docs
+├── scripts
+│   ├── audio.js
+│   ├── copy.js
+│   ├── html.js
+│   ├── img-convert.js
+│   ├── tinify.js
+│   └── utils.js
 ├── src
 │   ├── components
 │   ├── styles
@@ -29,47 +36,39 @@ A small framework-agnostic project template for front-end web apps and sites.
 │   │   ├── sections.css
 │   │   └── utils.css
 │   ├── utils
-│   │   └── modernizr
-│   │       └── modernizr.js
+│   │   └── polyfills
+│   │       └── index.js
 │   ├── views
-│   ├── favicon.ico
+│   ├── favicon-32.png
+│   ├── favicon-152.png
 │   ├── index.css
 │   ├── index.html
 │   ├── index.js
 │   └── robots.txt
-├── tasks
-│   ├── helpers
-│   │   ├── is-production.js
-│   │   └── logError.js
-│   ├── audio.js
-│   ├── connect.js
-│   ├── html.js
-│   ├── images.js
-│   ├── scripts.js
-│   ├── static.js
-│   └── styles.js
 ├── test
 │   └── test.spec.js
+├── .babelrc
 ├── .editorconfig
 ├── .eslintrc
 ├── .gitattributes
 ├── .gitignore
 ├── .stylelintrc
-├── gulpfile.js
+├── bs-config.js
 ├── karma.conf.js
+├── LICENSE
+├── modernizr-config.json
 ├── package.json
+├── postcss.config.js
 └── README.md
 ```
 
 `.gitignore` files are used to include some otherwise empty directories in the repository in order to define a reusable project structure.
-
 
 ## Set up
 
 ### Prerequisites
 
 * [Node](http://nodejs.org/)
-* [Gulp](http://gulpjs.com/)
 * [Browserify](http://browserify.org/)
 * [Karma](http://karma-runner.github.io/)
 
@@ -78,7 +77,7 @@ A small framework-agnostic project template for front-end web apps and sites.
 From a terminal or command prompt at the project root run:
 
 ```shell
-$ npm install
+npm install
 ```
 
 ### HTML
@@ -101,24 +100,17 @@ Polyfills and utilities are included in `src/utils/`. All other JS files are in 
 
 [Babel](https://babeljs.io/) is included to transpile es6/7. The default presets are es2015 and stage-0.
 
-#### vendor.js
+#### Vendors
 
-A separate `vendor.js` file can be built by configuring the vendor section in `package.json`. For example:
-
-```shell
-"vendor": {
-    "lodash": "lodash",
-    "threejs": "./src/vendor/threejs/three.js"
-}
-```
+A separate `vendor.js` file can be built by configuring the vendor section in `package.json`.
 
 #### Modernizr
 
-A [simple modernizr version](http://modernizr.com/download?-touchevents-addtest-setclasses-testprop-dontmin-cssclassprefix:Modernizr-) is included in the project in `src/utils/modernizr/`. It includes the standard HTML5 shim/shiv, CSSClasses, testProp and addTest. It also includes `touchevents` to exclude hover states from mobile devices. Modernizr CSS classNames are prefixed with `Modernizr-` to make them easy to recognise.
+A [simple modernizr version](http://modernizr.com/download?-touchevents-addtest-setclasses-testprop-dontmin-cssclassprefix:Modernizr-) is included in the project in `modernizr-config.json`. It includes the standard HTML5 shim/shiv, CSSClasses, testProp and addTest. It also includes `touchevents` to exclude hover states from mobile devices. Modernizr CSS classNames are prefixed with `Modernizr-` to make them easy to recognise.
 
-#### Lodash
+#### Utilities
 
-[Lodash](https://lodash.com/) is included by default and is used for basic configuration of the `index.html` page.
+Utility package [usfl](https://github.com/ianmcgregor/usfl) is included by default.
 
 ### Assets
 
@@ -128,57 +120,78 @@ Static assets such as icons are included in their respective component folder in
 
 ### Building
 
-Gulp is used to run the build tasks for the project. The tasks are all defined in `gulpfile.js`, while the corresponding functions are in the `tasks` directory. Paths/globs for `gulp.src` and `gulp.dest` are defined in `package.json`.
+Npm is used to run the build tasks for the project. The tasks are all defined in `package.json`, with scripts for more complicated tasks are contained in the `scripts` directory.
 
-Starts the connect, build and watch tasks:
+Runs the build task, starts the watch tasks and dev server:
 
 ```shell
-$ gulp
+npm start
 ```
 
-Processes assets and builds CSS and JS bundles, uglified and cleaned of debug logs and sourcemaps:
+Processes assets and builds CSS and JS bundles to the `dist` folder:
 
 ```shell
-$ gulp build --min
-or
-$ gulp build --prod
+npm run build
 ```
-Individual tasks:
+
+Deletes `dist` and recreates folder structure:
 
 ```shell
-# Builds the JS, CSS, static files and images to `dist` then exits:
-$ gulp build
+npm run clean
+```
 
-# Starts a simple web server that reloads when changes are made:
-$ gulp connect
+Starts a simple web server that reloads when changes are made:
 
-# Rebuilds bundles automatically when changes are made:
-$ gulp watch
+```shell
+npm run browsersync
+```
 
-# Builds CSS bundle to `dist/css/styles.css`:
-$ gulp css
+Builds CSS bundle to `dist/css/styles.css`:
 
-# Builds JS bundle to `dist/js/bundle.js`:
-$ gulp js
+```shell
+npm run css
+```
 
-# Builds vendor JS bundle to `dist/js/vendor.js`:
-$ gulp vendor
+Builds JS bundle to `dist/js/bundle.js`:
 
-# Copies modernizr.js to `dist/js`:
-$ gulp modernizr
+```shell
+npm run js
+```
 
-# Renders HTML templates and copies to `dist`:
-$ gulp html
+Generates modernizr.js and outputs to `dist/js`:
 
-# Copies static files to `dist`:
-$ gulp static
+```shell
+npm run modernizr
+```
 
-# Minifies and copies images to `dist/img`, creating WebP versions:
-$ gulp images
+Renders HTML templates and copies to `dist`:
 
-# Converts and copies audio files to `dist/audio`:
-$ gulp audio
+```shell
+npm run html
+```
 
+Copies files to `dist`:
+
+```shell
+npm run copy
+```
+
+Reformats and (optionally) resizes images and copies to `dist/img`:
+
+```shell
+npm run img:convert
+```
+
+Tinifies images and copies to `dist/img`:
+
+```shell
+npm run img:tinify
+```
+
+Converts audio files to ogg and mp3 and outputs to `dist/audio`:
+
+```shell
+npm run audio
 ```
 
 ### Linting
@@ -186,19 +199,25 @@ $ gulp audio
 [ESLint](http://eslint.org/) and [stylelint](http://stylelint.io/) are setup to lint the working files in `src/`. Rules can be configured by editing the `.eslintrc` and `.stylelintrc` files in the project root.
 
 ```shell
-$ gulp lint
-$ gulp js:lint
-$ gulp css:lint
+npm run lint
+npm run lint:js
+npm run lint:css
 ```
 
 A detailed report highlighting any problems will be output to the console.
 
 ### Testing
 
-A testing set up is included, utilising the [Karma](https://github.com/karma-runner/karma) test runner, [Mocha](http://visionmedia.github.io/mocha/) framework and [Chai](http://chaijs.com/) assertion library.
+A testing set up is included, utilising the [Karma](https://github.com/karma-runner/karma) test runner, [Mocha](http://visionmedia.github.io/mocha/) framework and [Chai](http://chaijs.com/) assertion library. A report highlighting any failed test will be output to the console.
+
+Single run, with linting:
 
 ```shell
-$ npm install -g karma-cli
-$ karma start
+npm test
 ```
-A report highlighting any failed test will be output to the console. Karma will keep running until the task is terminated and will rerun the tests when files are saved.
+
+Keep running until the task is terminated and rerun tests when files are changed:
+
+```shell
+npm test:debug
+```
