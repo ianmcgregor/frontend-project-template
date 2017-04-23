@@ -25,10 +25,6 @@ a:focus {
 button {
     color: inherit;
     cursor: pointer;
-    font-family: var(--font-normal);
+    font: inherit;
     user-select: none;
-}
-
-table {
-    table-layout: fixed;
 }

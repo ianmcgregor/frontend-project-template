@@ -6,24 +6,24 @@
  * .Component {
  *     font-size: var(--font-size-sm);
  *
- *     @media (--sm-viewport) {
+ *     @media (--sm) {
  *         font-size: var(--font-size-md);
  *     }
  *
- *     @media (--md-viewport) {
+ *     @media (--md) {
  *         font-size: var(--font-size-lg);
  *     }
  *
- *     @media (--lg-viewport) {
+ *     @media (--lg) {
  *         font-size: var(--font-size-xlg);
  *     }
  * }
  */
 
-@custom-media --min-viewport (max-width: 639px);
-@custom-media --sm-viewport (min-width: 640px);
-@custom-media --md-viewport (min-width: 960px);
-@custom-media --lg-viewport (min-width: 1200px);
-@custom-media --xlg-viewport (min-width: 1440px);
+@custom-media --min (max-width: 639px);
+@custom-media --sm (min-width: 640px);
+@custom-media --md (min-width: 960px);
+@custom-media --lg (min-width: 1200px);
+@custom-media --xlg (min-width: 1440px);
 @custom-media --portrait (orientation: portrait);
 @custom-media --landscape (orientation: landscape);

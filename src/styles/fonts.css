@@ -4,7 +4,8 @@
  * Local font files will be inlined by postcss-url
  */
 
-/*@font-face {
+/*
+@font-face {
     font-family: "Roboto";
     font-style: normal;
     font-weight: 400;
@@ -16,4 +17,5 @@
     font-style: normal;
     font-weight: 700;
     src: url("./fonts/roboto_bold.woff") format("woff");
-}*/
+}
+*/

@@ -10,7 +10,6 @@
  */
 
 :root {
-
     /* font family */
 
     --font-normal: monospace;
@@ -28,5 +27,4 @@
     /* layout */
 
     --margin: 1em;
-
 }

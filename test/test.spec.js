@@ -1,12 +1,13 @@
+const expect = require('chai').expect;
 const test = require('../src').test;
 
-describe('A test suite', function() {
-    before(function() {});
-    after(function() {});
-    beforeEach(function() {});
-    afterEach(function() {});
+describe('A test suite', () => {
+    // before(() => {});
+    // after(() => {});
+    // beforeEach(() => {});
+    // afterEach(() => {});
 
-    it('should pass', function() {
+    it('should pass', () => {
         expect(true).to.be.true;
         expect(test()).to.eql('hello');
     });

@@ -1,20 +1,46 @@
 {
   "name": "frontend-project-template",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "private": false,
   "description": "A small framework-agnostic project template for front-end web apps and sites.",
   "keywords": [
     "template",
     "boilerplate",
     "js",
-    "javascript",
-    "gulp",
-    "browserify"
+    "javascript"
   ],
   "main": "src/index.js",
   "scripts": {
-    "start": "gulp",
-    "test": "karma start"
+    "start": "npm run build && run-p watch:* browsersync",
+    "build": "run-s js css copy html modernizr",
+    "clean": "rm -rf dist && mkdir -p dist/js dist/css dist/img",
+    "test": "npm run lint && karma start --single-run --browsers Firefox",
+    "test:debug": "karma start",
+    "browsersync": "browser-sync start --config bs-config.js",
+    "css": "postcss -o 'dist/css/styles.css' 'src/index.css'",
+    "js:debug": "browserify src/index.js -o dist/js/bundle.js -t babelify",
+    "js": "browserify src/index.js -t babelify | uglifyjs -m -c warnings=false > dist/js/bundle.js",
+    "copy": "node scripts/copy.js 'src/*.{txt,png}' -o dist",
+    "modernizr": "modernizr -c modernizr-config.json -d dist/js",
+    "html": "node scripts/html.js 'src/index.html' -o 'dist' -d 'package.json'",
+    "watch:js": "onchange 'src/**/*.js' -- npm run js:debug",
+    "watch:css": "onchange 'src/**/*.css' -- npm run css",
+    "watch:html": "onchange 'src/**/*.html' -- npm run html",
+    "lint:css": "stylelint 'src/**/*.css'; exit 0",
+    "lint:js": "eslint 'src/**/*.js'; exit 0",
+    "lint": "run-s lint:*",
+    "audio": "node scripts/audio.js 'src/components' -o 'dist/audio'",
+    "img:convert": "node scripts/img-convert.js 'src/img/**/*{.png,.jpg}' -o 'dist/img' -t 'jpg, webp' -q 80 -s '1536, 1280, 1024, 768, 640'",
+    "img:tinify": "node scripts/tinify.js 'src/img' -o 'dist/img'",
+    "__comment": "use these if vendor.js is required, replacing 'three' example with modules in vendor",
+    "__js:vendor": "browserify -r three | uglifyjs -m -c warnings=false > dist/js/vendor.js",
+    "__js": "browserify -x three src/index.js -t babelify | uglifyjs -m -c warnings=false > dist/js/bundle.js"
+  },
+  "config": {
+    "__comment": "config passed to index.html template",
+    "path": "/",
+    "social": false,
+    "vendor": false
   },
   "repository": {
     "type": "git",
@@ -25,134 +51,55 @@
   "readmeFilename": "README.md",
   "dependencies": {
     "core-js": "^2.4.1",
-    "lodash": "^4.17.4",
-    "normalize.css": "^5.0.0",
-    "object-fit-images": "^3.1.0",
-    "postcss-object-fit-images": "^1.1.2",
+    "normalize.css": "^6.0.0",
     "suitcss-base": "^2.0.0",
-    "usfl": "^2.2.0"
+    "usfl": "^2.2.7"
   },
   "devDependencies": {
-    "autoprefixer": "^6.7.2",
-    "babel-core": "^6.22.1",
-    "babel-eslint": "^7.1.1",
-    "babel-preset-es2015": "^6.22.0",
-    "babel-preset-stage-0": "^6.22.0",
+    "async": "^2.3.0",
+    "autoprefixer": "^6.7.7",
+    "babel-core": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "babelify": "^7.3.0",
-    "browser-sync": "^2.18.7",
-    "browserify": "^14.0.0",
+    "browser-sync": "^2.18.8",
+    "browserify": "^14.3.0",
     "chai": "^3.5.0",
+    "chalk": "^1.1.3",
+    "connect-history-api-fallback": "^1.3.0",
     "cssnano": "^3.10.0",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.1",
-    "gulp-changed": "^1.3.2",
-    "gulp-debug": "^3.0.0",
-    "gulp-eslint": "^3.0.1",
-    "gulp-fluent-ffmpeg": "^1.0.2",
-    "gulp-if": "^2.0.2",
-    "gulp-image-resize": "^0.12.0",
-    "gulp-imagemin": "^3.1.1",
-    "gulp-notify": "^3.0.0",
-    "gulp-plumber": "^1.1.0",
-    "gulp-postcss": "^6.3.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sourcemaps": "^2.4.0",
-    "gulp-strip-debug": "^1.1.0",
-    "gulp-template": "^4.0.0",
-    "gulp-uglify": "^2.0.1",
-    "gulp-watch": "^4.3.11",
-    "gulp-webp": "^2.3.0",
-    "karma": "^1.4.1",
+    "eslint": "^3.19.0",
+    "fluent-ffmpeg": "^2.1.0",
+    "glob": "^7.1.1",
+    "imagemin": "^5.2.2",
+    "karma": "^1.6.0",
     "karma-browserify": "^5.1.1",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^2.0.0",
-    "karma-firefox-launcher": "^1.0.0",
+    "karma-firefox-launcher": "^1.0.1",
     "karma-mocha": "^1.3.0",
+    "lodash.template": "^4.4.0",
+    "mkdirp": "^0.5.1",
     "mocha": "^3.2.0",
+    "modernizr": "^3.5.0",
+    "npm-run-all": "^4.0.2",
+    "onchange": "^3.2.1",
     "postcss-calc": "^5.3.1",
+    "postcss-cli": "^3.2.0",
     "postcss-custom-media": "^5.0.1",
     "postcss-custom-properties": "^5.0.2",
     "postcss-easings": "^0.3.0",
     "postcss-import": "^9.1.0",
-    "postcss-nested": "^1.0.0",
+    "postcss-nested": "^1.0.1",
     "postcss-reporter": "^3.0.0",
-    "postcss-url": "^5.1.2",
-    "stylelint": "^7.8.0",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
+    "postcss-url": "^6.0.4",
+    "sharp": "^0.17.3",
+    "snake-case": "^2.1.0",
+    "stylelint": "^7.10.1",
+    "svgo": "^0.7.2",
+    "tinify": "^1.5.0",
     "watchify": "^3.9.0",
-    "yargs": "^6.6.0"
-  },
-  "vendor": {
-    "lodash": "lodash"
-  },
-  "browser": {},
-  "babel": {
-    "presets": [
-      [
-        "es2015",
-        {
-          "loose": true
-        }
-      ]
-    ]
-  },
-  "browserify": {
-    "transform": [
-      "babelify"
-    ]
-  },
-  "paths": {
-    "audio": {
-      "entry": "src/components/**/*.{wav,aiff,aif}",
-      "dest": "dist/audio"
-    },
-    "connect": {
-      "dir": "dist/",
-      "proxy": "",
-      "files": [
-        "dist/**/*"
-      ]
-    },
-    "html": {
-      "entry": "src/index.html",
-      "dest": "dist"
-    },
-    "images": {
-      "entry": "src/components/**/*.{png,jpg,svg,json}",
-      "entryWebp": "src/components/**/*.{png,jpg}",
-      "dest": "dist/img"
-    },
-    "scripts": {
-      "entry": "src/index.js",
-      "dest": "dist/js",
-      "modernizr": {
-        "entry": "src/utils/modernizr/modernizr.js",
-        "dest": "dist/js"
-      },
-      "lint": [
-        "src/**/*.js",
-        "task/**/*.js",
-        "!src/utils/modernizr/modernizr.js"
-      ]
-    },
-    "static": {
-      "entry": [
-        "src/robots.txt",
-        "src/favicon-32.png",
-        "src/favicon-152.png"
-      ],
-      "dest": "dist"
-    },
-    "styles": {
-      "entry": "src/index.css",
-      "dest": "dist/css/",
-      "watch": [
-        "src/**/*.css"
-      ],
-      "lint": [
-        "src/**/*.css"
-      ]
-    }
+    "yargs": "^7.1.0"
   }
 }

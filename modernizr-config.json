@@ -1,0 +1,12 @@
+{
+  "minify": true,
+  "classPrefix": "Modernizr-",
+  "options": [
+    "addTest",
+    "testProp",
+    "setClasses"
+  ],
+  "feature-detects": [
+    "test/touchevents"
+  ]
+}

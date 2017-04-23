@@ -22,5 +22,5 @@ import 'usfl/polyfill/requestAnimationFrame';
 * object-fit
 */
 
-import objectFitImages from 'object-fit-images';
-objectFitImages();
+// import objectFitImages from 'object-fit-images';
+// objectFitImages();
