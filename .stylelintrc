@@ -1,5 +1,8 @@
 {
     "rules": {
+        "comment-empty-line-before": null,
+        "comment-whitespace-inside": null,
+        "custom-property-empty-line-before": null,
         "indentation": 4
     }
 }

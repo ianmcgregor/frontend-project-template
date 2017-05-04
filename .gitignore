@@ -16,10 +16,10 @@ Desktop.ini
 user.properties
 npm-debug.log
 
-/bower_components/
 /dist/
 /node_modules/
 /temp/
+/public/js/bundle.js.tmp*
 
 *.m4v
 *.mov

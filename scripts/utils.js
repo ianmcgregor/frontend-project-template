@@ -9,6 +9,12 @@ function getDest(dir, src, flatten) {
     return `${dir}/${dest}`;
 }
 
+function getDirs(paths) {
+    return paths
+    .filter(item => fs.statSync(item).isDirectory())
+    .map(item => path.normalize(item));
+}
+
 function getFiles(paths) {
     return paths
         .filter(item => !fs.statSync(item).isDirectory())
@@ -68,6 +74,7 @@ function toKb(bytes) {
 
 module.exports = {
     getDest,
+    getDirs,
     getFiles,
     getSource,
     log,

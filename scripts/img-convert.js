@@ -1,16 +1,22 @@
 // npm i -D async chalk glob mkdirp sharp yargs
 
-const argv = require('yargs').argv;
 const fs = require('fs');
 const glob = require('glob');
 const path = require('path');
 const sharp = require('sharp');
 const utils = require('./utils');
 
+const argv = require('yargs')
+    .array('s')
+    .array('sizes')
+    .array('t')
+    .array('types')
+    .argv;
+
 const input = argv.i || argv.input || argv._[0];
 const output = argv.o || argv.output;
-const sizes = toArray(argv.s || argv.sizes) || [];// || [1536, 1280, 1024, 768, 640];
-const types = toArray(argv.t || argv.types) || ['jpg', 'webp'];
+const sizes = (argv.s || argv.sizes) || [];// || [1536, 1280, 1024, 768, 640];
+const types = (argv.t || argv.types) || ['jpg', 'webp'];
 const quality = argv.q || argv.quality || 80;
 const flatten = argv.f || argv.flatten;
 const changeCase = argv.c || argv.case;
@@ -21,10 +27,6 @@ if (!input || !output) {
 
 const dir = path.resolve(process.cwd(), output);
 const source = utils.getSource(input, '/**/*.{png,jpg}');
-
-function toArray(str) {
-    return str && str.split(',').map(s => s.trim());
-}
 
 function logInfo(src, dest, info, size) {
     utils.log(true, src, '>', dest, utils.sizeInfo(size, info.size));

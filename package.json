@@ -11,6 +11,7 @@
   ],
   "main": "src/index.js",
   "scripts": {
+    "postinstall": "npm run clean",
     "start": "npm run build && run-p watch:* browsersync",
     "build": "run-s js css copy html modernizr",
     "clean": "rm -rf dist && mkdir -p dist/js dist/css dist/img",
@@ -30,8 +31,9 @@
     "lint:js": "eslint 'src/**/*.js'; exit 0",
     "lint": "run-s lint:*",
     "audio": "node scripts/audio.js 'src/components' -o 'dist/audio'",
-    "img:convert": "node scripts/img-convert.js 'src/img/**/*{.png,.jpg}' -o 'dist/img' -t 'jpg, webp' -q 80 -s '1536, 1280, 1024, 768, 640'",
+    "img:convert": "node scripts/img-convert.js 'src/img/**/*{.png,.jpg}' -o 'dist/img' -t jpg webp -q 80 -s 1536 1280 1024 768 640",
     "img:tinify": "node scripts/tinify.js 'src/img' -o 'dist/img'",
+    "texturepack": "node scripts/texture-pack.js 'src/textures/*' -o 'dist/textures' -t -v 1: 0.5:@0.5x",
     "__comment": "use these if vendor.js is required, replacing 'three' example with modules in vendor",
     "__js:vendor": "browserify -r three | uglifyjs -m -c warnings=false > dist/js/vendor.js",
     "__js": "browserify -x three src/index.js -t babelify | uglifyjs -m -c warnings=false > dist/js/bundle.js"
@@ -53,7 +55,7 @@
     "core-js": "^2.4.1",
     "normalize.css": "^6.0.0",
     "suitcss-base": "^2.0.0",
-    "usfl": "^2.2.7"
+    "usfl": "^2.2.8"
   },
   "devDependencies": {
     "async": "^2.3.0",
