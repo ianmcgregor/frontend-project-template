@@ -59,10 +59,22 @@ function getFormats(src, size) {
     });
 }
 
+function getBase(src) {
+    if (flatten) {
+        return path.basename(src);
+    }
+    const index = source.indexOf('*');
+    const start = source.slice(0, index);
+    if (index > 0 && src.indexOf(start) === 0) {
+        return src.slice(start.length);
+    }
+    return src;
+}
+
 function getSizes(src, size) {
     return sizes.reduce((arr, w) => {
         return arr.concat(types.map(type => {
-            const base = flatten ? path.basename(src) : src.split(path.sep).slice(1).join(path.sep);
+            const base = getBase(src);
             const name = changeCase ? utils.toCase(base) : base;
             const dest = `${dir}/${utils.removeExt(name)}_${w}.${type}`;
 

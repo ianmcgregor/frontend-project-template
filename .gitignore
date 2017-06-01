@@ -1,12 +1,11 @@
 .*
 ~*
-!/.babelrc
+!.gitignore
+!.gitinclude
 !/.gitattributes
-!/.gitignore
-!/.gitinclude
+!/.babelrc
 !/.editorconfig
 !/.eslintrc
-!/.csslintrc
 !/.stylelintrc
 !/.travis.yml
 

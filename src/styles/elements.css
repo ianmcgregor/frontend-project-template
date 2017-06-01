@@ -28,3 +28,7 @@ button {
     font: inherit;
     user-select: none;
 }
+
+input {
+    font: inherit;
+}

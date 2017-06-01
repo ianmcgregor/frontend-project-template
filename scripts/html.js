@@ -9,7 +9,7 @@ const utils = require('./utils');
 const cwd = process.cwd();
 const input = argv.i || argv.input || argv._[0];
 const output = argv.o || argv.output;
-const debug = !!argv.debug;
+const debug = !!argv.debug || process.env.NODE_ENV === 'development';
 const dataPath = argv.d || argv.data;
 
 const dir = path.resolve(cwd, output);
