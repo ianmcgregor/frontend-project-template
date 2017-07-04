@@ -1,10 +1,13 @@
-const template = require('lodash.template');
+// npm i -D async chalk glob lodash.template mkdirp yargs
+
 const argv = require('yargs').argv;
 const async = require('async');
+const chalk = require('chalk');
 const fs = require('fs');
 const glob = require('glob');
+const mkdirp = require('mkdirp');
 const path = require('path');
-const utils = require('./utils');
+const template = require('lodash.template');
 
 const cwd = process.cwd();
 const input = argv.i || argv.input || argv._[0];
@@ -12,8 +15,8 @@ const output = argv.o || argv.output;
 const debug = !!argv.debug || process.env.NODE_ENV === 'development';
 const dataPath = argv.d || argv.data;
 
-const dir = path.resolve(cwd, output);
-const source = utils.getSource(input, '/**/*.html');
+const out = path.resolve(cwd, output);
+const source = getSource(input, '/**/*.html');
 
 const data = require(`${cwd}/${dataPath}`);
 const tmplData = Object.assign({}, argv, data, {
@@ -24,34 +27,81 @@ const tmplData = Object.assign({}, argv, data, {
 function processHTML(item, callback) {
     fs.readFile(item, 'utf8', (err, tmpl) => {
         if (err) {
-            utils.log(false, item, '>', dest);
+            log(2, item, '>', dest);
             callback(err);
             return;
         }
         const html = template(tmpl)(tmplData);
-        const dest = utils.getDest(dir, item);
+        const dest = getDest(source, out, item);
 
         fs.writeFile(dest, html, 'utf8', error => {
             if (error) {
-                utils.log(false, item, '>', dest);
+                log(2, item, '>', dest);
                 callback(error);
                 return;
             }
-            utils.log(true, item, '>', dest);
+            log(0, item, '>', dest);
             callback();
         });
     });
 }
 
 glob(source, (er, paths) => {
-    const files = utils.getFiles(paths);
+    const files = paths
+        .filter(item => !fs.statSync(item).isDirectory())
+        .map(item => path.normalize(item));
 
-    utils.makeDirs(files.map(src => utils.getDest(dir, src)), dirErr => {
+    makeDirs(files.map(src => getDest(source, out, src)), dirErr => {
         if (dirErr) {
             throw dirErr;
         }
         async.eachSeries(files, processHTML, () => {
-            utils.log(true, 'Processed', files.length, 'html files');
+            log(0, 'Processed', files.length, 'html files');
         });
     });
 });
+
+// helpers
+
+function log(level, ...args) {
+    const msg = args.join(' ').replace(`${process.cwd()}/`, '');
+    if (level === 0) {
+        return console.log(chalk.green('✓', msg));
+    }
+    if (level === 1) {
+        return console.log(chalk.yellow('>', msg));
+    }
+    return console.log(chalk.red('✗', msg));
+}
+
+function makeDirs(paths, callback) {
+    let error = null;
+
+    paths
+        .map(p => path.dirname(p))
+        .filter((v, i, a) => a.indexOf(v) === i)
+        .forEach(dirpath => mkdirp(dirpath, err => {
+            if (err) {
+                error = err;
+            }
+        }));
+
+    callback(error);
+}
+
+function getSource(inPath, globPattern) {
+    if (fs.existsSync(inPath) && fs.statSync(inPath).isDirectory()) {
+        return path.normalize(`${inPath}/${globPattern}`);
+    }
+    return inPath;
+}
+
+function getDest(src, dest, item) {
+    let itemDest = '';
+    if (src.includes('*')) {
+        itemDest = item.replace(src.slice(0, src.indexOf('*')), '');
+    } else {
+        itemDest = path.basename(item);
+    }
+    return path.normalize(`${dest}/${itemDest}`);
+}
