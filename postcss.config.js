@@ -14,6 +14,9 @@ module.exports = {
             browsers: ['last 2 version'],
             cascade: false
         }),
-        require('cssnano')()
+        require('cssnano')(),
+        require('postcss-reporter')({
+            clearReportedMessages: true
+        })
     ]
 };
